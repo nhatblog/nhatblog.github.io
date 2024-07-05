@@ -1,0 +1,20 @@
+volumes:
+  bundle:
+
+services:
+  blog:
+    build:
+      context: .
+      args:
+        RUBY_VERSION: 3.1.6-slim
+        BUNDLER_VERSION: 2.3
+        APP_DIR: /usr/blog
+    stdin_open: true
+    tty: true
+    environment:
+      BUNDLE_PATH: /usr/local/bundle
+    volumes:
+      - bundle:/usr/local/bundle
+      - ./:/usr/blog
+    ports:
+      - 4000:4000
